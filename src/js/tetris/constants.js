@@ -12,5 +12,11 @@ define([], function(){
         PIXEL_WIDTH: 16,
         FIELD_WIDTH: 20,
         FIELD_HEIGHT: 35,
+
+        KEY_LEFT: 'KEY_LEFT',
+        KEY_RIGHT: 'KEY_RIGHT',
+        KEY_DROP: 'KEY_DROP',
+        KEY_ROTATE: 'KEY_ROTATE',
+        KEY_BACK: 'KEY_BACK',
     }
 });

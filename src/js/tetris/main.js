@@ -1,6 +1,6 @@
 define(
-    ['easel', './constants', './store/gamestore', './store/actions', './views/intro', './views/game'],
-    function(createjs, constants, store, actions, viewsIntro, viewsGame){
+    ['easel', './constants', './store/gamestore', './store/actions', './controller', './views/intro', './views/game'],
+    function(createjs, constants, store, actions, Controller, viewsIntro, viewsGame){
     'use strict';
 
     let introView = viewsIntro();
@@ -9,6 +9,7 @@ define(
     });
 
     let gameView = viewsGame();
+    let gameController = new Controller();
 
     let pages = {
         [constants.PAGE_INTRO]: introView,
@@ -18,12 +19,11 @@ define(
     let App = {
         stage: null,
         currentPage: null,
-        currentView: null,
-        init: function(){
+        init: function(node){
             let canvas = document.createElement('canvas');
             canvas.width = constants.GAME_WIDTH;
             canvas.height = constants.GAME_HEIGHT;
-            this.node.appendChild(canvas);
+            node.appendChild(canvas);
             this.stage = new createjs.Stage(canvas);
             this.stage.enableMouseOver(10);
             store.dispatch(actions.switchPage(constants.PAGE_INTRO));
@@ -46,18 +46,16 @@ define(
             }
         },
         start: function(fromScratch){
-            store.dispatch(actions.addPiece());
-            setInterval( function(){
-                store.dispatch(actions.moveDown());
-            }, 100);
+            gameController.start();
         },
-        stop: function(){},
+        stop: function(){
+            gameController.stop();
+        },
     };
 
     let app = function(node){
-        this.node = node;
         store.subscribe(this.update.bind(this));
-        this.init();
+        this.init(node);
     };
     app.prototype = App;
 

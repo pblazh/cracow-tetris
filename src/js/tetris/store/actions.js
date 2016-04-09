@@ -9,21 +9,24 @@ define(['ramda'], function(R){
             R.split('_')
         );
 
-    const FIELDS = ['ADD_SHAPE',
+    const FIELDS = ['ADD_PIECE',
                     'MOVE_RIGHT',
                     'MOVE_LEFT',
                     'MOVE_DOWN',
                     'DROP_DOWN',
                     'ROTATE_LEFT',
                     'GAME_START',
-                    'GAME_STOP'];
+                    'GAME_STOP',
+                    'SET_SCORE',
+                    'SET_TIME',
+                    'SWITCH_PAGE'];
 
     var constants = R.reduce(
         (a, b) => R.merge(a, {[b]: b}),
         {}, FIELDS);
 
     // It generates an action creator
-    let action = (type) => () => ({type});
+    let action = (type) => (value) => ({type, value});
 
     return R.reduce(
         (a, b) => R.merge(a, {[dashToCamel(b)]: action(b)})
