@@ -1,0 +1,43 @@
+@mixin acentered(){
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%)
+}
+@mixin centered($width, $height){
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -$width/2;
+    margin-top: -$height/2;
+    width: $width;
+    height: $height;
+}
+@mixin x-centered($width){
+    position: absolute;
+    left: 50%;
+    margin-left: -$width/2;
+    width: $width;
+}
+@mixin y-centered($height){
+    position: absolute;
+    top: 50%;
+    margin-top: -$height/2;
+    height: $height;
+}
+
+@mixin abs-pos ($left: auto, $top: auto, $right: auto, $bottom: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: absolute;
+}
+
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+

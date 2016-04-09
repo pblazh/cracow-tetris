@@ -1,0 +1,12 @@
+{
+  "name": "cracow-tetris",
+  "version": "0.0.0",
+  "dependencies": {
+    "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.4/redux.js",
+    "requirejs": "^2.2.0",
+    "EaselJS": "easeljs#^0.8.2",
+    "ramda": "^0.20.1",
+    "almond": "^0.3.2"
+  },
+  "devDependencies": {}
+}

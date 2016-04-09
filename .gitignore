@@ -1,13 +1,14 @@
 node_modules
 
 ### Bower ###
-app/bower_components
+src/bower_components
 
 
 ### Linux ###
 .*
 !.gitignore
 !.git*
+!.bowerrc
 !.jshintrc
 !.npmignore
 *~
