@@ -58,7 +58,7 @@ define(['ramda', '../constants'],
             field = R.map(R.map(R.identity), field);
             for(let y = 0, l = block.data.length; y < l; ++y){
                 for(let x = 0, m = block.data[0].length; x < m; ++x){
-                    field[y + block.y][x + block.x] = block.data[y][x];
+                    field[y + block.y][x + block.x] += block.data[y][x];
                 }
             }
             return field;
