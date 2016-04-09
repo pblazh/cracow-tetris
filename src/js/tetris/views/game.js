@@ -18,10 +18,11 @@ define(
             // draw a piece over the game field
             if(pc.data){
                 R.forEach(
-                    pair => pixels[
-                        (pc.y + Math.floor(pair[0] / pc.data.length)) * constants.FIELD_WIDTH
-                        + (pc.x + pair[0] % pc.data.length)
-                    ].highlight(pair[1])
+                    pair =>
+                    pixels[(pc.y + Math.floor(pair[0] / pc.data[0].length))
+                            * constants.FIELD_WIDTH
+                            + (pc.x + pair[0] % pc.data[0].length)
+                        ].highlight(pair[1])
                 )( enumerate(R.flatten(pc.data)) );
             }
         }

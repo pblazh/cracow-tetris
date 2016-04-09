@@ -33,7 +33,7 @@ define(
 
         setInterval( function(){
             store.dispatch(actions.moveDown());
-        }, 100);
+        }, 3000);
 
         store.dispatch(actions.addPiece());
     };

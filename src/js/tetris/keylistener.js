@@ -33,13 +33,13 @@ define(['easel', './constants'],
             case KEYCODE_DOWN:
                 listener.dispatchEvent({
                     type: 'key',
-                    value: constants.KEY_DROP,
+                    value: constants.KEY_ROTATE,
                 });
                 break;
             case KEYCODE_SPACE:
                 listener.dispatchEvent({
                     type: 'key',
-                    value: constants.KEY_ROTATE,
+                    value: constants.KEY_DROP,
                 });
                 break;
             };

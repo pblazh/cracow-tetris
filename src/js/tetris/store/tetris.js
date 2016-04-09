@@ -4,11 +4,35 @@ define(['ramda', '../constants'],
 
         const EMPTY_FIELD = R.repeat(R.repeat(0, constants.FIELD_WIDTH), constants.FIELD_HEIGHT);
 
-        let makePiece = (data, x, y) => ({
-            x: x || 0,
-            y: y || constants.FIELD_HEIGHT - 3,
-            data: data || [[2, 3, 4],[0, 0, 5],[0, 0, 6]],
-        });
+        const SHAPES = [
+            [[ 1, 1 ],
+             [ 1, 1 ]],
+
+            [[ 2, 2, 2 ],
+             [ 0, 0, 2]],
+
+            [[ 3, 3, 3 ],
+             [ 3, 0, 0]],
+
+            [[ 4, 4, 0 ],
+             [ 0, 4, 4]],
+
+            [[ 5, 5, 5 ]],
+        ];
+
+        let pick = (list) => R.nth(Math.floor(Math.random() * list.length), list);
+
+        let makePiece = (data, x, y) => {
+            let piece = {
+                x: x || 0,
+                y: y || constants.FIELD_HEIGHT - 3,
+                data: data || pick(SHAPES),
+            };
+            R.forEach(
+                () => piece.data = rotateDataLeft(piece.data)
+            )(R.range(1, Math.floor(Math.random() * 4)));
+            return piece;
+        };
 
         // shift game field down eliminating filled rows
         let shiftField = R.compose(
@@ -65,15 +89,20 @@ define(['ramda', '../constants'],
             return block;
         };
 
-        let rotateLeft = function(block, field){
-            let d = block.data;
-            let out = R.map(() => [], R.range(0, d[0].length));
-            for(let y = 0, l = d.length; y < l; ++y){
-                for(let x = 0, m = d[0].length; x < m; ++x){
-                    out[out.length - 1 - x].push(d[y][x]);
+        let rotateDataLeft = function(data){
+            let out = R.map(() => [], R.range(0, data[0].length));
+            for(let y = 0, l = data.length; y < l; ++y){
+                for(let x = 0, m = data[0].length; x < m; ++x){
+                    out[out.length - 1 - x].push(data[y][x]);
                 }
             }
-            let nBlock = R.merge(block, {data: out});
+            return out;
+        };
+        let rotateLeft = function(block, field){
+            let nBlock = R.merge(
+                block,
+                {data: rotateDataLeft(block.data)}
+            );
             return checkBlock(nBlock, field) ? block : nBlock;
         };
 
