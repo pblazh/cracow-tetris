@@ -6,7 +6,7 @@ define([], function(){
         COLOR_FG: '#C2FFAE',
         PAGE_INTRO: 'PAGE_INTRO',
         PAGE_GAME: 'PAGE_GAME',
-        PAGE_SCORE: 'PAGE_SCORE',
+        PAGE_FINAL: 'PAGE_FINAL',
         GAME_WIDTH: 400,
         GAME_HEIGHT: 600,
         PIXEL_WIDTH: 16,

@@ -1,11 +1,17 @@
 define(
-    ['easel', './constants', './store/gamestore', './store/actions', './controller', './views/intro', './views/game'],
-    function(createjs, constants, store, actions, Controller, viewsIntro, viewsGame){
+    ['easel', './constants', './store/gamestore', './store/actions', './controller', './views/intro', './views/game', './views/final'],
+    function(createjs, constants, store, actions, Controller, viewsIntro, viewsGame, viewsFinal){
     'use strict';
 
     let introView = viewsIntro();
     introView.on('complete', function(){
         store.dispatch(actions.switchPage(constants.PAGE_GAME));
+    });
+
+    let finalView = viewsFinal();
+    finalView.on('complete', function(){
+        store.dispatch(actions.switchPage(constants.PAGE_INTRO));
+        store.dispatch(actions.restart());
     });
 
     let gameView = viewsGame();
@@ -14,6 +20,7 @@ define(
     let pages = {
         [constants.PAGE_INTRO]: introView,
         [constants.PAGE_GAME]: gameView,
+        [constants.PAGE_FINAL]: finalView,
     };
 
     let App = {
@@ -42,6 +49,9 @@ define(
                 this.stage.update();
                 if(page === constants.PAGE_GAME){
                     this.start();
+                }
+                if(page === constants.PAGE_SCORE){
+                    this.stop();
                 }
             }
         },

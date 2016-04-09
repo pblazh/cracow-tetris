@@ -25,17 +25,16 @@ define(
         }
     }
     Controller.prototype.stop = function(){
+        clearInterval(this.interval);
         this.kListener.destroy();
     }
     Controller.prototype.start = function(){
         this.kListener = keylistener(store);
         this.kListener.on('key', this.onKey);
 
-        setInterval( function(){
+        this.interval = setInterval( function(){
             store.dispatch(actions.moveDown());
-        }, 3000);
-
-        store.dispatch(actions.addPiece());
+        }, 300);
     };
 
     return Controller;

@@ -1,52 +1,23 @@
 define(
-    ['ramda', 'easel', '../constants', './uis', '../store/gamestore'],
-    function(R, createjs, constants, uis, store){
+    ['easel', '../constants', './gamefield', './gamequeue', './gamescore'],
+    function(createjs, constants, gamefield, gamequeue, gamescore){
     'use strict';
-
-    let enumerate = list => R.zip(R.range(0, list.length), list);
-
-
-    function update(pixels){
-        let state = store.getState();
-        if(state.page === constants.PAGE_GAME){
-            let gf = state.gamefield;
-            let pc = state.piece;
-            R.forEach(pair => {
-                pixels[pair[0]].highlight(pair[1]);
-            })(enumerate(R.flatten(gf)));
-
-            // draw a piece over the game field
-            if(pc.data){
-                R.forEach(
-                    pair =>
-                    pixels[(pc.y + Math.floor(pair[0] / pc.data[0].length))
-                            * constants.FIELD_WIDTH
-                            + (pc.x + pair[0] % pc.data[0].length)
-                        ].highlight(pair[1])
-                )( enumerate(R.flatten(pc.data)) );
-            }
-        }
-    }
 
     return function(){
         var container = new createjs.Container();
 
-        let bg = new createjs.Shape();
-        bg.graphics
-            .beginFill(constants.COLOR_BG)
-            .drawRect(0, 0, constants.GAME_WIDTH, constants.GAME_HEIGHT);
-        container.addChild(bg);
+        let gf = gamefield();
+        let gq = gamequeue();
+        gq.y = 45;
+        gq.x = constants.GAME_WIDTH - gq.width - 10;
 
-        let pixels = [];
-        R.forEach(n => {
-            let px = uis.gamePixel();
-            px.y = constants.GAME_HEIGHT - constants.PIXEL_WIDTH  - constants.PIXEL_WIDTH * Math.floor(n / constants.FIELD_WIDTH);
-            px.x = constants.PIXEL_WIDTH * (n % constants.FIELD_WIDTH);
-            pixels.push(px);
-            container.addChild(px);
-        })(R.range(0, constants.FIELD_WIDTH * constants.FIELD_HEIGHT));
+        let gs = gamescore();
+        gs.y = 8;
+        gs.x = 8;
 
-        store.subscribe(()=>update(pixels));
+        container.addChild(gf);
+        container.addChild(gq);
+        container.addChild(gs);
 
         return container;
     };
