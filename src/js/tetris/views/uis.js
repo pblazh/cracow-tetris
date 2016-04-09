@@ -7,7 +7,7 @@ define(
     function fill(g, color){
         g.beginFill(constants.COLOR_BG)
          .drawRect(0, 0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
-        console.log( color );
+
         switch(color){
         case 0:
             g.beginFill(constants.COLOR_FG)

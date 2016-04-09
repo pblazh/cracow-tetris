@@ -17,7 +17,10 @@ define(['ramda', '../constants'],
             [[ 4, 4, 0 ],
              [ 0, 4, 4]],
 
-            [[ 5, 5, 5 ]],
+            [[ 0, 5, 5 ],
+             [ 5, 5, 0]],
+
+            [[ 6, 6, 6 ]],
         ];
 
         let pick = (list) => R.nth(Math.floor(Math.random() * list.length), list);
@@ -38,7 +41,7 @@ define(['ramda', '../constants'],
         let shiftField = R.compose(
             R.take(constants.FIELD_HEIGHT),
             R.flip(R.concat)(EMPTY_FIELD),
-            R.dropWhile(R.all(R.identity))
+            R.filter(R.any(a => a===0 ))
         );
 
         // check if a block could be placed in the field

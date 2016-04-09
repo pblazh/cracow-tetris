@@ -65,6 +65,9 @@ define(
             default:
                 nState = state;
             }
+            nState = R.merge(nState, {
+                gamefield: tetris.shiftField(nState.gamefield),
+            });
             return nState;
         }
 
