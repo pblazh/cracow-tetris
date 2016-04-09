@@ -1,26 +1,27 @@
 define(
-    ['easel', './constants', './store/gamestore', './store/actions', './controller', './views/intro', './views/game', './views/final'],
-    function(createjs, constants, store, actions, Controller, viewsIntro, viewsGame, viewsFinal){
+    ['easel', './constants', './store/gamestore', './store/actions', './controller',
+     './views/intro_page', './views/game_page', './views/final_page'],
+    function(createjs, constants, store, actions, Controller, IntroPage, GamePage, FinalPage){
     'use strict';
 
-    let introView = viewsIntro();
-    introView.on('complete', function(){
+    let introPage = new IntroPage();
+    introPage.on('complete', function(){
         store.dispatch(actions.switchPage(constants.PAGE_GAME));
     });
 
-    let finalView = viewsFinal();
-    finalView.on('complete', function(){
-        store.dispatch(actions.switchPage(constants.PAGE_INTRO));
+    let finalPage = new FinalPage();
+    finalPage.on('complete', function(){
         store.dispatch(actions.restart());
+        store.dispatch(actions.switchPage(constants.PAGE_GAME));
     });
 
-    let gameView = viewsGame();
+    let gamePage = new GamePage();
     let gameController = new Controller();
 
     let pages = {
-        [constants.PAGE_INTRO]: introView,
-        [constants.PAGE_GAME]: gameView,
-        [constants.PAGE_FINAL]: finalView,
+        [constants.PAGE_INTRO]: introPage,
+        [constants.PAGE_GAME]: gamePage,
+        [constants.PAGE_FINAL]: finalPage,
     };
 
     let App = {
@@ -32,34 +33,27 @@ define(
             canvas.height = constants.GAME_HEIGHT;
             node.appendChild(canvas);
             this.stage = new createjs.Stage(canvas);
-            this.stage.enableMouseOver(10);
             store.dispatch(actions.switchPage(constants.PAGE_INTRO));
-
-            function handleTick(event) {
-                this.stage.update();
-            }
-            createjs.Ticker.addEventListener("tick", handleTick.bind(this));
         },
         update: function(){
+            //switch screens of the game
             let page = store.getState().page;
             if(this.currentPage !== page && pages[page]){
                 this.stage.removeChild(pages[this.currentPage]);
                 this.currentPage = page;
                 this.stage.addChild(pages[this.currentPage]);
-                this.stage.update();
+
                 if(page === constants.PAGE_GAME){
-                    this.start();
+                    gameController.start();
                 }
                 if(page === constants.PAGE_SCORE){
-                    this.stop();
+                    gameController.stop();
                 }
+
+                // there is no need to track mouse when in game
+                this.stage.enableMouseOver((page === constants.PAGE_GAME) ? 0 : 10);
             }
-        },
-        start: function(fromScratch){
-            gameController.start();
-        },
-        stop: function(){
-            gameController.stop();
+            this.stage.update();
         },
     };
 

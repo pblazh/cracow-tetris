@@ -5,10 +5,13 @@ define(
 
         const INITIAL_STATE = {
             score: 0,
+            startTime: 0,
             time: 0,
             page: constants.PAGE_INTRO,
-            piece: {},
+            queue: tetris.makePiece(),
+            piece: tetris.makePiece(),
             gamefield: tetris.EMPTY_FIELD,
+            game: null,
         };
         function gameReducer(state, action){
             if(!state){
@@ -18,15 +21,12 @@ define(
             switch(action.type){
             case actions.SWITCH_PAGE:
                 nState = R.merge(state, {page: action.value});
+                if(action.value === constants.PAGE_GAME){
+                    nState.startTime = new Date().getTime();
+                }
                 break;
-            case actions.SET_SCORE:
-                nState = R.merge(state, {page: action.value});
-                break;
-            case actions.SET_TIME:
-                nState = R.merge(state, {time: action.value});
-                break;
-            case actions.ADD_PIECE:
-                nState = R.merge(state, {piece: tetris.makePiece()});
+            case actions.RESTART:
+                nState = R.merge(state, {gamefield: INITIAL_STATE.gamefield});
                 break;
             case actions.MOVE_LEFT:
                 nState = R.merge(state, {
@@ -47,7 +47,8 @@ define(
                 let nPiece = tetris.dropDown(state.piece, state.gamefield);
                 nState = R.merge(state, {
                     gamefield: tetris.mergeBlock(nPiece, state.gamefield),
-                    piece: tetris.makePiece(),
+                    queue: tetris.makePiece(),
+                    piece: state.queue,
                 });
                 break;
             case actions.MOVE_DOWN:
@@ -58,15 +59,29 @@ define(
                 if(R.equals(nState.piece, state.piece)){
                     nState = R.merge(nState, {
                         gamefield: tetris.mergeBlock(nState.piece, nState.gamefield),
-                        piece: tetris.makePiece(),
+                        queue: tetris.makePiece(),
+                        piece: state.queue,
                     });
                 }
                 break;
             default:
                 nState = state;
             }
+            if(state.page === constants.PAGE_GAME){
+                let res = tetris.shiftField(nState.gamefield);
+                nState = R.merge(nState, {
+                    gamefield: res[0],
+                    score: state.score + res[1],
+                });
+                nState.time = new Date().getTime() - nState.startTime;
+                if(tetris.checkBlock(nState.piece, nState.gamefield)){
+                    nState = R.merge(nState, {
+                        page: constants.PAGE_FINAL
+                    });
+                }
+            }
             nState = R.merge(nState, {
-                gamefield: tetris.shiftField(nState.gamefield),
+                game: tetris.mergeBlock(nState.piece, nState.gamefield),
             });
             return nState;
         }

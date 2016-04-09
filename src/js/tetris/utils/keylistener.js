@@ -1,4 +1,4 @@
-define(['easel', './constants'],
+define(['easel', '../constants'],
     function(createjs, constants){
     'use strict';
 

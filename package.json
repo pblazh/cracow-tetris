@@ -1,13 +1,15 @@
 {
-  "name": "cracow-tetris",
+  "name": "cracow.tetris",
   "version": "1.0.0",
-  "description": "The test task. create a Tetris game",
+  "description": "test task",
   "main": "Gruntfile.js",
   "dependencies": {},
   "devDependencies": {
     "connect-livereload": "^0.5.4",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^3.0.4",
+    "grunt-bower-install": "^1.6.0",
+    "grunt-bower-requirejs": "^2.0.0",
     "grunt-concurrent": "^2.3.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^1.0.0",
@@ -16,6 +18,7 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-requirejs": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-rev": "^0.1.0",
     "grunt-sass": "^1.1.0",
     "grunt-string-replace": "^1.2.1",
     "load-grunt-tasks": "^3.5.0",
@@ -26,9 +29,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pblazh/cracow-tetris.git"
+    "url": "git+ssh://git@bitbucket.org/androbot/cracow.tetris.git"
   },
   "author": "Pawel Blazejewski",
-  "license": "BSD",
-  "homepage": "https://github.com/pblazh/cracow-tetris"
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/androbot/cracow.tetris#readme"
 }

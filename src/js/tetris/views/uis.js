@@ -11,13 +11,13 @@ define(
         switch(color){
         case 0:
             g.beginFill(constants.COLOR_FG)
-                .drawRect(7, 7, constants.PIXEL_WIDTH - 14, constants.PIXEL_WIDTH - 14)
+                .drawRect(10, 10, constants.PIXEL_WIDTH - 20, constants.PIXEL_WIDTH - 20)
             break;
         case 1:
             g.beginFill(constants.COLOR_FG)
                 .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
             g.beginFill(constants.COLOR_BG)
-                .drawRect(3, 3, constants.PIXEL_WIDTH - 6, constants.PIXEL_WIDTH - 6)
+                .drawRect(8, 8, constants.PIXEL_WIDTH - 16, constants.PIXEL_WIDTH - 16)
             break;
         case 2:
             g.beginFill(constants.COLOR_FG)
@@ -32,7 +32,7 @@ define(
             g.beginFill(constants.COLOR_FG)
                 .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
             g.beginFill(constants.COLOR_BG)
-                .drawRect(6, 6, constants.PIXEL_WIDTH - 12, constants.PIXEL_WIDTH - 12)
+                .drawRect(10, 10, constants.PIXEL_WIDTH - 20, constants.PIXEL_WIDTH - 20)
             break;
         case 5:
         default:
@@ -61,20 +61,18 @@ define(
             .drawRect(0, 0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
 
         fill(this.graphics, this.color);
+        this.cache(0,0, 24,24);
     }
 
     GamePixel = createjs.promote(GamePixel, 'Shape');
 
 
-
-
-
     const ENTER_BUTTON_SHEET = new createjs.SpriteSheet({
         images: ['./assets/sprites.png'],
         frames: [
-            [10, 10, 90, 35],
-            [100, 10, 90, 35],
-            [190, 10, 90, 35],
+            [10, 10, 80, 35],
+            [95, 10, 80, 35],
+            [175, 10, 80, 35],
         ],
         animations: {
             out: 0,
@@ -83,6 +81,13 @@ define(
         }
     });
 
+    const LOGO_SHEET = new createjs.SpriteSheet({
+        images: ['./assets/sprites.png'],
+        frames: [
+            [10, 50, 140, 80],
+        ],
+    });
+    let logo = new createjs.Sprite(LOGO_SHEET);
 
     return {
         buttonEnter: function(){
@@ -91,5 +96,6 @@ define(
             return buttonEnter;
         },
         gamePixel: () => new GamePixel(),
+        logo,
     };
 });

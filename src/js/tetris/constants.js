@@ -9,9 +9,10 @@ define([], function(){
         PAGE_FINAL: 'PAGE_FINAL',
         GAME_WIDTH: 400,
         GAME_HEIGHT: 600,
-        PIXEL_WIDTH: 16,
-        FIELD_WIDTH: 20,
-        FIELD_HEIGHT: 35,
+        PIXEL_WIDTH: 24,
+        FIELD_WIDTH: 12,
+        FIELD_HEIGHT: 23,
+        FONT: 'Arial',
 
         KEY_LEFT: 'KEY_LEFT',
         KEY_RIGHT: 'KEY_RIGHT',

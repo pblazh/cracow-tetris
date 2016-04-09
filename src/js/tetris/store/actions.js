@@ -9,7 +9,7 @@ define(['ramda'], function(R){
             R.split('_')
         );
 
-    const FIELDS = ['ADD_PIECE',
+    const FIELDS = ['RESTART',
                     'MOVE_RIGHT',
                     'MOVE_LEFT',
                     'MOVE_DOWN',

@@ -20,6 +20,9 @@ define(['ramda', '../constants'],
             [[ 0, 5, 5 ],
              [ 5, 5, 0]],
 
+            [[ 0, 5, 0 ],
+             [ 5, 5, 5]],
+
             [[ 6, 6, 6 ]],
         ];
 
@@ -34,15 +37,25 @@ define(['ramda', '../constants'],
             R.forEach(
                 () => piece.data = rotateDataLeft(piece.data)
             )(R.range(1, Math.floor(Math.random() * 4)));
+            piece.x = Math.floor(Math.random() * (constants.FIELD_WIDTH - piece.data[0].length + 1));
             return piece;
         };
 
         // shift game field down eliminating filled rows
-        let shiftField = R.compose(
-            R.take(constants.FIELD_HEIGHT),
-            R.flip(R.concat)(EMPTY_FIELD),
-            R.filter(R.any(a => a===0 ))
-        );
+        let shiftField = (gamefield) => {
+            let ff = R.filter(R.any(a => a===0 ))(gamefield);
+            let nf = R.compose(
+                    R.take(constants.FIELD_HEIGHT),
+                    R.flip(R.concat)(EMPTY_FIELD)
+                )(ff);
+            return [nf, nf.length - ff.length];
+        };
+
+        //        let shiftField = R.compose(
+        //            R.take(constants.FIELD_HEIGHT),
+        //            R.flip(R.concat)(EMPTY_FIELD),
+        //            R.filter(R.any(a => a===0 ))
+        //        );
 
         // check if a block could be placed in the field
         let checkBlock = function(block, field){

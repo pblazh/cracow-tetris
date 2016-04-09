@@ -1,5 +1,5 @@
 define(
-    ['easel', './constants', './store/gamestore', './store/actions', './keylistener'],
+    ['easel', './constants', './store/gamestore', './store/actions', './utils/keylistener'],
     function(createjs, constants, store, actions, keylistener){
     'use strict';
 
@@ -34,7 +34,7 @@ define(
 
         this.interval = setInterval( function(){
             store.dispatch(actions.moveDown());
-        }, 300);
+        }, 3000);
     };
 
     return Controller;
