@@ -5,11 +5,11 @@ define(['ramda'], function(R){
     const HEIGHT = 12;
     const EMPTY_FIELD = R.repeat(R.repeat(0, WIDTH), HEIGHT);
 
-    function Block(data, x, y){
-        this.x = x || 0;
-        this.y = y || 0;
-        this.data = data;
-    }
+    let makeBlock = (data, x, y) => ({
+            x: x || 0,
+            y: y || 0,
+            data: data,
+        });
 
 
     const INITIAL_STATE = {
@@ -43,24 +43,24 @@ define(['ramda'], function(R){
     // move block
     let moveDown = function(block, field){
         if(block.y > 0){
-            let nblock = new Block(block.data, block.x, block.y - 1);
-            return checkBlock(nblock, field) ? block : nblock;
+            let nBlock = R.merge(block, {y: block.y - 1});
+            return checkBlock(nBlock, field) ? block : nBlock;
         }
         return block;
     };
 
     let moveLeft = function(block, field){
         if(block.x > 0){
-            let nblock = new Block(block.data, block.x - 1, block.y);
-            return checkBlock(nblock, field) ? block : nblock;
+            let nBlock = R.merge(block, {x: block.x - 1});
+            return checkBlock(nBlock, field) ? block : nBlock;
         }
         return block;
     };
 
     let moveRight = function(block, field){
         if((block.x + block.data[0].length) < field[0].length){
-            let nblock = new Block(block.data, block.x + 1, block.y);
-            return checkBlock(nblock, field) ? block : nblock;
+            let nBlock = R.merge(block, {x: block.x + 1});
+            return checkBlock(nBlock, field) ? block : nBlock;
         }
         return block;
     };
@@ -73,16 +73,16 @@ define(['ramda'], function(R){
                 out[out.length - 1 - x].push(d[y][x]);
             }
         }
-        let nb = new Block(out, block.x, block.y);
-        return checkBlock(nb, field) ? block : nb;
+        let nBlock = R.merge(block, {data: out});
+        return checkBlock(nBlock, field) ? block : nBlock;
     };
 
     let dropDown = function(block, field){
-        let nblock;
+        let nBlock;
         do{
-            nblock = block;
+            nBlock = block;
             block = moveDown(block, field);
-        }while(nblock.y !== block.y);
+        }while(nBlock.y !== block.y);
         return block;
     };
 
@@ -119,7 +119,7 @@ define(['ramda'], function(R){
     print(n);
 
     console.log('block ------------');
-    let b = new Block([
+    let b = makeBlock([
         [2,3,4],
         [0,0,5],
         [0,0,6],
