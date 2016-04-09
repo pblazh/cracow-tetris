@@ -43,6 +43,9 @@ define(['ramda', '../constants'],
 
         // check if a block could be placed in the field
         let checkBlock = function(block, field){
+            if(block.x + block.data[0].length > field[0].length){
+                return true;
+            }
             for(let y = 0, l = block.data.length; y < l; ++y){
                 for(let x = 0, m = block.data[0].length; x < m; ++x){
                     if(field[y + block.y][x + block.x] && block.data[y][x]){
