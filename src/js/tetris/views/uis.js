@@ -4,16 +4,54 @@ define(
     'use strict';
 
 
+    function fill(g, color){
+        g.beginFill(constants.COLOR_BG)
+         .drawRect(0, 0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
+        console.log( color );
+        switch(color){
+        case 0:
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(7, 7, constants.PIXEL_WIDTH - 14, constants.PIXEL_WIDTH - 14)
+            break;
+        case 1:
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
+            g.beginFill(constants.COLOR_BG)
+                .drawRect(3, 3, constants.PIXEL_WIDTH - 6, constants.PIXEL_WIDTH - 6)
+            break;
+        case 2:
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
+            g.beginFill(constants.COLOR_BG)
+                .drawRect(3, 3, constants.PIXEL_WIDTH - 6, constants.PIXEL_WIDTH - 6)
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(6, 6, constants.PIXEL_WIDTH - 12, constants.PIXEL_WIDTH - 12)
+            break;
+        case 3:
+        case 4:
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
+            g.beginFill(constants.COLOR_BG)
+                .drawRect(6, 6, constants.PIXEL_WIDTH - 12, constants.PIXEL_WIDTH - 12)
+            break;
+        case 5:
+        default:
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
+            break;
+        }
+    }
 
     function GamePixel() {
         this.Shape_constructor();
         this.enabled = false;
         this.reDraw();
     }
+
     let p = createjs.extend(GamePixel, createjs.Shape);
-    p.highlight = function(enabled) {
-        if(this.enabled !== enabled){
-            this.enabled = enabled;
+    p.highlight = function(color) {
+        if(this.color !== color){
+            this.color = color;
             this.reDraw();
         }
     }
@@ -22,15 +60,7 @@ define(
             .beginFill(constants.COLOR_BG)
             .drawRect(0, 0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
 
-        if(this.enabled){
-            this.graphics
-                .beginFill(constants.COLOR_FG)
-                .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
-        }else{
-            this.graphics
-                .beginFill(constants.COLOR_FG)
-                .drawRect(6, 6, constants.PIXEL_WIDTH - 12, constants.PIXEL_WIDTH - 12)
-        }
+        fill(this.graphics, this.color);
     }
 
     GamePixel = createjs.promote(GamePixel, 'Shape');
