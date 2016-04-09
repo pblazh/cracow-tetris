@@ -8,9 +8,9 @@ define(
 
         let bg = new createjs.Shape();
         bg.graphics
-            .beginFill(constants.COLO_BG)
+            .beginFill(constants.COLOR_BG)
             .drawRect(0, 0, constants.GAME_WIDTH, constants.GAME_HEIGHT)
-            .beginFill(constants.COLO_FG)
+            .beginFill(constants.COLOR_FG)
             .drawCircle(constants.GAME_WIDTH/2, constants.GAME_HEIGHT/2, 50);
         container.addChild(bg);
 

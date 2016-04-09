@@ -35,15 +35,22 @@ define(
         },
         update: function(){
             let page = store.getState().page;
-            console.log( page );
             if(this.currentPage !== page && pages[page]){
                 this.stage.removeChild(pages[this.currentPage]);
                 this.currentPage = page;
                 this.stage.addChild(pages[this.currentPage]);
                 this.stage.update();
+                if(page === constants.PAGE_GAME){
+                    this.start();
+                }
             }
         },
-        start: function(fromScratch){},
+        start: function(fromScratch){
+            store.dispatch(actions.addPiece());
+            setInterval( function(){
+                store.dispatch(actions.moveDown());
+            }, 100);
+        },
         stop: function(){},
     };
 
