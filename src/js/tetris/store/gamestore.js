@@ -16,12 +16,13 @@ define(
             game: null,
         };
         function gameReducer(state, action){
-            console.log( action );
             if(!state){
                 return INITIAL_STATE;
             }
             let nState;
             switch(action.type){
+            case actions.PUSH_BACK:
+                return action.value;
             case actions.SWITCH_PAGE:
                 nState = R.merge(state, {page: action.value});
                 if(action.value === constants.PAGE_GAME){
@@ -29,7 +30,12 @@ define(
                 }
                 break;
             case actions.RESTART:
-                nState = R.merge(state, {gamefield: INITIAL_STATE.gamefield});
+                nState = R.merge(state, {
+                    gamefield: INITIAL_STATE.gamefield,
+                    speed: INITIAL_STATE.speed,
+                    lives: INITIAL_STATE.lives,
+                    score: INITIAL_STATE.score,
+                });
                 break;
             case actions.MOVE_LEFT:
                 nState = R.merge(state, {
@@ -80,7 +86,7 @@ define(
                     gamefield: res[0],
                     score: nScore,
                     speed: nScore
-                        ? INITIAL_STATE.speed / (nScore * 0.5)
+                        ? INITIAL_STATE.speed / nScore
                         : INITIAL_STATE.speed,
                 });
 

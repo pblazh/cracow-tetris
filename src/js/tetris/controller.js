@@ -1,6 +1,6 @@
 define(
-    ['easel', './constants', './store/gamestore', './store/actions', './utils/keylistener'],
-    function(createjs, constants, store, actions, keylistener){
+    ['easel', './constants', './store/gamestore', './store/history', './store/actions', './utils/keylistener'],
+    function(createjs, constants, store, historyPop,  actions, keylistener){
     'use strict';
 
     function Controller(){
@@ -22,7 +22,10 @@ define(
             store.dispatch(actions.dropDown());
             break;
         case constants.KEY_BACK:
-            store.dispatch(actions.rollBack());
+            let prevState = historyPop();
+            if(prevState && prevState.page === constants.PAGE_GAME){
+                store.dispatch(actions.pushBack(prevState));
+            }
             break;
         }
     };

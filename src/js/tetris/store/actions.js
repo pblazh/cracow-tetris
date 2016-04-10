@@ -17,7 +17,7 @@ define(['ramda'], function(R){
                     'ROTATE_LEFT',
                     'GAME_START',
                     'GAME_STOP',
-                    'ROLL_BACK',
+                    'PUSH_BACK',
                     'SWITCH_PAGE'];
 
     var constants = R.reduce(
