@@ -6,12 +6,12 @@ To add a little fun I'm planning to make in in functional style to have an easy 
 
 Since there was mentioned that the game should work at least on the latest browsers, I used heavily ES6 arrow functions as it leads to much cleaner code. If the broader is desired it can be easily accomplished by using Babel or any other transpiller.
 
-To run the project:
+##To run the project:
+
 - install npm
 - say install npm dependencies by "npm install"
 - install grunt by "npm install -g grunt-cli"
 - install bower dependences by "bower install"
-
 - to run a dev server say "grunt server"
 - to built say "grunt"
 
