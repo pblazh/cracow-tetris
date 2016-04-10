@@ -11,13 +11,13 @@ define(
         switch(color){
         case 0:
             g.beginFill(constants.COLOR_FG)
-                .drawRect(10, 10, constants.PIXEL_WIDTH - 20, constants.PIXEL_WIDTH - 20)
+                .drawRect(10, 10, constants.PIXEL_WIDTH - 20, constants.PIXEL_WIDTH - 20);
             break;
         case 1:
             g.beginFill(constants.COLOR_FG)
                 .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
             g.beginFill(constants.COLOR_BG)
-                .drawRect(8, 8, constants.PIXEL_WIDTH - 16, constants.PIXEL_WIDTH - 16)
+                .drawRect(8, 8, constants.PIXEL_WIDTH - 16, constants.PIXEL_WIDTH - 16);
             break;
         case 2:
             g.beginFill(constants.COLOR_FG)
@@ -25,16 +25,33 @@ define(
             g.beginFill(constants.COLOR_BG)
                 .drawRect(3, 3, constants.PIXEL_WIDTH - 6, constants.PIXEL_WIDTH - 6)
             g.beginFill(constants.COLOR_FG)
-                .drawRect(6, 6, constants.PIXEL_WIDTH - 12, constants.PIXEL_WIDTH - 12)
+                .drawRect(6, 6, constants.PIXEL_WIDTH - 12, constants.PIXEL_WIDTH - 12);
             break;
         case 3:
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
+            g.beginFill(constants.COLOR_BG)
+                .drawRect(10, 10, constants.PIXEL_WIDTH - 20, constants.PIXEL_WIDTH - 20);
+            break;
         case 4:
             g.beginFill(constants.COLOR_FG)
                 .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
             g.beginFill(constants.COLOR_BG)
-                .drawRect(10, 10, constants.PIXEL_WIDTH - 20, constants.PIXEL_WIDTH - 20)
+                .drawRect(4, 4, 6, 6)
+                .drawRect(constants.PIXEL_WIDTH - 10, 4, 6, 6)
+                .drawRect(constants.PIXEL_WIDTH - 10, constants.PIXEL_WIDTH - 10, 6, 6)
+                .drawRect(4, constants.PIXEL_WIDTH - 10, 6, 6);
             break;
         case 5:
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
+            g.beginFill(constants.COLOR_BG)
+                .drawRect(3, 3, constants.PIXEL_WIDTH - 6, constants.PIXEL_WIDTH - 6)
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(6, 6, constants.PIXEL_WIDTH - 12, constants.PIXEL_WIDTH - 12)
+            g.beginFill(constants.COLOR_FG)
+                .drawRect(8, 8, constants.PIXEL_WIDTH - 16, constants.PIXEL_WIDTH - 16);
+            break;
         default:
             g.beginFill(constants.COLOR_FG)
                 .drawRect(1, 1, constants.PIXEL_WIDTH - 2, constants.PIXEL_WIDTH - 2)
