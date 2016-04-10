@@ -102,7 +102,7 @@ module.exports = function (grunt) {
                     name: '../bower_components/almond/almond',
                     //name: '<%= app.src %>/../bower_components/requirejs/require.js',
 
-                    include: [ 'config.js', 'main_built.js' ],
+                    include: ['main_built.js' ],
                     out: '<%= app.dst %>/js/main.js'
                 }
             }
