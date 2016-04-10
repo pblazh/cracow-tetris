@@ -29,6 +29,9 @@ define(
                 store.dispatch(actions.pushBack(prevState));
             }
             break;
+        case constants.KEY_MAGIC:
+            store.dispatch(actions.magic());
+            break;
         }
     };
 

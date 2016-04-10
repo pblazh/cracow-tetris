@@ -3,9 +3,11 @@ define(['easel', '../constants', './uis'], function(createjs, constants, uis){
 
     const INFO = ['# <LEFT>  - left',
                   '# <RIGHT> - right',
-                  '# <SPACE> - drop',
                   '# <DOWN>  - rotate',
-                  '# <UP>    - rollback'].join('\n');
+                  '# <SPACE> - drop',
+                  '# <UP>    - rollback',
+                  '# <M>     - magic'
+                 ].join('\n');
 
     function IntroPage() {
         this.Container_constructor();
@@ -27,7 +29,7 @@ define(['easel', '../constants', './uis'], function(createjs, constants, uis){
         info.textAlign = 'left';
         info.lineHeight = 18;
         info.x = constants.GAME_WIDTH / 2 - 90;
-        info.y = constants.GAME_HEIGHT - 120;
+        info.y = constants.GAME_HEIGHT - 140;
         this.addChild(info);
     }
 

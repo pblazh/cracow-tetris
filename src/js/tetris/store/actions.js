@@ -14,6 +14,7 @@ define(['ramda'], function(R){
                     'MOVE_DOWN',
                     'DROP_DOWN',
                     'ROTATE_LEFT',
+                    'MAGIC',
                     'GAME_START',
                     'GAME_RESTART',
                     'GAME_STOP',

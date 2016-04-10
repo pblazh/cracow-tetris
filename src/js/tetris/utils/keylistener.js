@@ -5,6 +5,7 @@ define(['easel', '../constants'], function(createjs, constants){
           KEYCODE_RIGHT = 39,
           KEYCODE_UP = 38,
           KEYCODE_DOWN = 40,
+          KEYCODE_M = 77,
           KEYCODE_SPACE = 32;
 
 
@@ -39,6 +40,11 @@ define(['easel', '../constants'], function(createjs, constants){
                 listener.dispatchEvent({
                     type: 'key',
                     value: constants.KEY_DROP,
+                });
+            case KEYCODE_M:
+                listener.dispatchEvent({
+                    type: 'key',
+                    value: constants.KEY_MAGIC,
                 });
                 break;
             };

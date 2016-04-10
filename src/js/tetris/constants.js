@@ -20,5 +20,6 @@ define([], function(){
         KEY_DROP: 'KEY_DROP',
         KEY_ROTATE: 'KEY_ROTATE',
         KEY_BACK: 'KEY_BACK',
-    }
+        KEY_MAGIC: 'KEY_MAGIC',
+    };
 });

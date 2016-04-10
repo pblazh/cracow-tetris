@@ -59,6 +59,16 @@ define(['redux', 'ramda', './actions', './tetris', '../constants'],
                     piece: state.queue,
                 });
                 break;
+            case actions.MAGIC:
+                let nBlock = tetris.makePiece(state.piece.x, state.piece.y);
+                if(!tetris.isHitWalls(nBlock, state.gamefield)){
+                    nState = R.merge(state, {
+                        piece: nBlock,
+                    });
+                }else{
+                    nState = state;
+                }
+                break;
             case actions.MOVE_DOWN:
                 nState = R.merge(state, {
                     piece: tetris.moveDown(state.piece, state.gamefield),

@@ -39,18 +39,20 @@ define(['ramda', '../constants'],
             return out;
         };
         // generate a random piece and rotate it random times
-        let makePiece = (data, x, y) => {
+        let makePiece = (x, y, data) => {
             let piece = {
-                x: x || 0,
-                y: y || 0,
+                x: 0,
+                y: 0,
                 data: data || pick(SHAPES),
             };
             R.forEach(
                 () => piece.data = rotateDataLeft(piece.data)
             )(R.range(1, Math.floor(Math.random() * 4)));
-            piece.x = Math.floor(Math.random()
-                    * (constants.FIELD_WIDTH - piece.data[0].length + 1));
-            piece.y = constants.FIELD_HEIGHT - piece.data.length + 0;
+            piece.x = (x === undefined) ? (Math.floor(Math.random()
+                                  * (constants.FIELD_WIDTH - piece.data[0].length + 1)))
+                                : x;
+            piece.y = (y === undefined) ? (constants.FIELD_HEIGHT - piece.data.length + 0)
+                                : y;
             return piece;
         };
 
