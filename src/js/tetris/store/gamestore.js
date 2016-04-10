@@ -1,4 +1,4 @@
-define(['redux', 'ramda', './actions', './tetris', '../constants'],
+define(['redux', 'ramda', './actions', './tetris', 'constants'],
     function(redux, R, actions, tetris, constants){
         'use strict';
 
@@ -60,6 +60,7 @@ define(['redux', 'ramda', './actions', './tetris', '../constants'],
                 });
                 break;
             case actions.MAGIC:
+                // magicly replace one piece with another
                 let nBlock = tetris.makePiece(state.piece.x, state.piece.y);
                 if(!tetris.isHitWalls(nBlock, state.gamefield)){
                     nState = R.merge(state, {
@@ -73,7 +74,7 @@ define(['redux', 'ramda', './actions', './tetris', '../constants'],
                 nState = R.merge(state, {
                     piece: tetris.moveDown(state.piece, state.gamefield),
                 });
-                // if block has not moved...
+                // if block has not moved that means it reached the bottom
                 if(R.equals(nState.piece, state.piece)){
                     nState = R.merge(nState, {
                         gamefield: tetris.mergeBlock(nState.piece, nState.gamefield),
@@ -106,6 +107,7 @@ define(['redux', 'ramda', './actions', './tetris', '../constants'],
                     });
                 }
             }
+            // merge the gamefield and the falling piece for later visualisation
             nState = R.merge(nState, {
                 game: tetris.mergeBlock(nState.piece, nState.gamefield),
             });

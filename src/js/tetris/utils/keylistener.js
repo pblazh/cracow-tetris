@@ -1,6 +1,7 @@
 define(['easel', '../constants'], function(createjs, constants){
     'use strict';
 
+    // listen key for the keyevent and convert them into game specific events
     const KEYCODE_LEFT = 37,
           KEYCODE_RIGHT = 39,
           KEYCODE_UP = 38,

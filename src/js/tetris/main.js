@@ -1,20 +1,23 @@
 define(
-    ['easel', './constants', './store/gamestore', './store/history', './store/actions', './controller',
+    ['easel', 'constants', './store/gamestore', './store/history', './store/actions', './controller',
      './views/intro_page', './views/game_page', './views/final_page'],
     function(createjs, constants, store, history, actions, Controller, IntroPage, GamePage, FinalPage){
     'use strict';
 
+    // first page of the game
     let introPage = new IntroPage();
     introPage.on('complete', function(){
         store.dispatch(actions.switchPage(constants.PAGE_GAME));
     });
 
+    // the page with the greetings and the score
     let finalPage = new FinalPage(store);
     finalPage.on('complete', function(){
         store.dispatch(actions.gameRestart());
         store.dispatch(actions.switchPage(constants.PAGE_GAME));
     });
 
+    // the main game screen
     let gamePage = new GamePage(store, history);
     let gameController = new Controller();
 
@@ -24,6 +27,7 @@ define(
         [constants.PAGE_FINAL]: finalPage,
     };
 
+    // the main application object
     let App = {
         stage: null,
         currentPage: null,

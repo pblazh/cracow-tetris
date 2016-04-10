@@ -1,5 +1,7 @@
-define(['easel', '../constants', './uis'], function(createjs, constants, uis){
+define(['easel', 'constants', './uis'], function(createjs, constants, uis){
     'use strict';
+
+    // starting page of the game
 
     const INFO = ['# <LEFT>  - left',
                   '# <RIGHT> - right',

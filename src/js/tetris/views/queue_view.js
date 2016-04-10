@@ -1,10 +1,11 @@
 define(
-    ['ramda', 'easel', '../constants', '../utils/tools', './gamepixel_view', './state_listener'],
-    function(R, createjs, constants, U, GamepixelView, StateListener){
+    ['ramda', 'easel', 'constants', 'tools', './gamepixel_view', './state_listener'],
+    function(R, createjs, constants, tools, GamepixelView, StateListener){
     'use strict';
 
     const PIECE_WIDTH = 3;
 
+    // The view displaying the 'next piece' in the game
     function QueueView(store) {
         this.Container_constructor();
 
@@ -25,6 +26,7 @@ define(
 
         this.addChild(text);
 
+        // generate pixels and distribute them in a grid
         this.pixels = [];
         R.forEach(n => {
             let px = new GamepixelView();
@@ -44,7 +46,7 @@ define(
         let q = state.queue;
         if(this.lastUpdated !== q){
             this.lastUpdated = q;
-            // draw a gamefield
+            // paint all pixels in black
             R.forEach(p => {
                 this.pixels[p].highlight(0);
             })(R.range(0, PIECE_WIDTH * PIECE_WIDTH));
@@ -57,7 +59,7 @@ define(
                             * PIECE_WIDTH
                             + (pair[0] % q.data[0].length)
                         ].highlight(pair[1])
-                )( U.enumerate(R.flatten(q.data)) );
+                )( tools.enumerate(R.flatten(q.data)) );
             }
         }
     };

@@ -1,14 +1,7 @@
-define(['ramda'], function(R){
+define(['ramda', 'tools'], function(R, tools){
     'use strict';
 
-    // convert underscored uppercase string into the cameleCased
-    let dashToCamel = R.compose(
-            (a) => a[0].toLowerCase() + a.substr(1),
-            R.join(''),
-            R.map((a) => a[0] + a.substr(1).toLowerCase()),
-            R.split('_')
-        );
-
+    // all possible actions in the app
     const FIELDS = ['MOVE_RIGHT',
                     'MOVE_LEFT',
                     'MOVE_DOWN',
@@ -29,6 +22,6 @@ define(['ramda'], function(R){
     let action = (type) => (value) => ({type, value});
 
     return R.reduce(
-        (a, b) => R.merge(a, {[dashToCamel(b)]: action(b)})
+        (a, b) => R.merge(a, {[tools.dashToCamel(b)]: action(b)})
     )(constants, FIELDS);
 });

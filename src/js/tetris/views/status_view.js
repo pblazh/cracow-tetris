@@ -1,7 +1,9 @@
 define(
-    ['easel', '../constants', './state_listener'],
+    ['easel', 'constants', './state_listener'],
     function(createjs, constants, StateListener){
     'use strict';
+
+    // displaying the status info above the game field
 
     var TEXT = 'SCORE: 0000  TIME: 00:00  SPEED: 00.1';
 

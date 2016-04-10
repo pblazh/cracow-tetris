@@ -1,7 +1,9 @@
 define(
-    ['ramda', 'easel', '../constants', '../store/history', './state_listener'],
+    ['ramda', 'easel', 'constants', '../store/history', './state_listener'],
     function(R, createjs, constants, history, StateListener){
     'use strict';
+
+    // show content of the history buffer
 
     var TEXT = '*';
 

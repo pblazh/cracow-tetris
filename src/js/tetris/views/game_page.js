@@ -1,8 +1,9 @@
 define(
-    ['easel', '../constants', './gamefield_view', './queue_view', './status_view', './lives_view'],
+    ['easel', 'constants', './gamefield_view', './queue_view', './status_view', './lives_view'],
     function(createjs, constants, GamefieldView, QueueView, StatusView, LivesView){
     'use strict';
 
+    // the page of the game. Just the container to distribute subcomponents
     function GamePage(store, history) {
         this.Container_constructor();
 

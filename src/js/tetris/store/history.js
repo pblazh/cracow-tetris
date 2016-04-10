@@ -1,6 +1,7 @@
-define(['./gamestore', '../constants', 'ramda'], function(store, constants, R){
+define(['./gamestore', 'constants', 'ramda'], function(store, constants, R){
         'use strict';
 
+        // this module is singleton which store all gamestore states
         let history = [];
         store.subscribe(function(){
             let st = store.getState();
@@ -17,6 +18,7 @@ define(['./gamestore', '../constants', 'ramda'], function(store, constants, R){
 
         return {
             pop(){
+                // restore the state before the last
                 history.pop();
                 return history.pop();
             },

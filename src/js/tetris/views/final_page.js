@@ -1,8 +1,9 @@
 define(
-    ['easel', '../constants', './uis', './state_listener'],
+    ['easel', 'constants', './uis', './state_listener'],
     function(createjs, constants, uis, StateListener){
     'use strict';
 
+    // the final page. greetings, score and the replay button
     function FinalPage(store) {
         this.Container_constructor();
 

@@ -1,7 +1,10 @@
-define(['easel', './magic', '../constants'], function(createjs, magic, constants){
+define(['easel', './magic', 'constants'], function(createjs, magic, constants){
     'use strict';
 
 
+    // The visual representation of a pixel in the game
+
+    // fill the pixel with different colors (black and white patterns)
     function fill(g, color){
         g.beginFill(constants.COLOR_BG)
          .drawRect(0, 0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
@@ -63,6 +66,7 @@ define(['easel', './magic', '../constants'], function(createjs, magic, constants
     function GamePixel() {
         this.Container_constructor();
         this.enabled = false;
+        // the sprite whith pixalate effect
         this.magic = magic();
 
         this.bg = new createjs.Shape();

@@ -1,8 +1,9 @@
 define(
-    ['ramda', 'easel', '../constants', '../utils/tools', './gamepixel_view', './state_listener'],
-    function(R, createjs, constants, U, GamepixelView, StateListener){
+    ['ramda', 'easel', 'constants', 'tools', './gamepixel_view', './state_listener'],
+    function(R, createjs, constants, tools, GamepixelView, StateListener){
     'use strict';
 
+    // the gamefield which gets the game info from the store and display them
     function GamefieldView(store) {
         this.Container_constructor();
 
@@ -25,7 +26,7 @@ define(
     p.onUpdate = function(state){
         R.forEach(pair => {
             this.pixels[pair[0]].highlight(pair[1]);
-        })(U.enumerate(R.flatten(state.game)));
+        })(tools.enumerate(R.flatten(state.game)));
     };
 
     GamefieldView = createjs.promote(GamefieldView, 'Container');

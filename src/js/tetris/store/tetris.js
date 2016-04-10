@@ -1,7 +1,9 @@
-define(['ramda', '../constants'],
+define(['ramda', 'constants'],
     function(R, constants){
         'use strict';
 
+        // the visualless implementation of the Tetris
+        // use a 2D array as a gamefield and a smaller one as a falling piece
         const EMPTY_FIELD = R.repeat(R.repeat(0, constants.FIELD_WIDTH), constants.FIELD_HEIGHT);
 
         const SHAPES = [
