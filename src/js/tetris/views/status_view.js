@@ -7,7 +7,7 @@ define(
 
     function StatusView() {
         this.Container_constructor();
-        this.text = new createjs.Text(TEXT, '16px ' + constants.FONT, constants.COLOR_FG);
+        this.text = new createjs.Text(TEXT, '18px ' + constants.FONT, constants.COLOR_FG);
         this.addChild(this.text);
 
         let sl = new StateListener(store, ['score', 'time', 'speed'], this.onUpdate.bind(this));

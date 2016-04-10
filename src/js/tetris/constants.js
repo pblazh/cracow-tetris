@@ -12,7 +12,8 @@ define([], function(){
         PIXEL_WIDTH: 24,
         FIELD_WIDTH: 12,
         FIELD_HEIGHT: 23,
-        FONT: 'monospace',
+        HISTORY: 9,
+        FONT: '"Nova Mono", monospace',
 
         KEY_LEFT: 'KEY_LEFT',
         KEY_RIGHT: 'KEY_RIGHT',

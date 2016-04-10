@@ -1,6 +1,6 @@
 define(
-    ['ramda', 'easel', '../constants', '../store/gamestore', './state_listener'],
-    function(R, createjs, constants, store, StateListener){
+    ['ramda', 'easel', '../constants', '../store/gamestore', '../store/history', './state_listener'],
+    function(R, createjs, constants, store, history, StateListener){
     'use strict';
 
     var TEXT = '*';
@@ -12,18 +12,18 @@ define(
         title.x = constants.PIXEL_WIDTH * 0.70;
         title.textAlign = 'center';
 
-        this.text = new createjs.Text(TEXT, '48px ' + constants.FONT, constants.COLOR_FG);
+        this.text = new createjs.Text(TEXT, '50px ' + constants.FONT, constants.COLOR_FG);
         this.text.y = 30;
 
         this.addChild(title);
         this.addChild(this.text);
 
-        let sl = new StateListener(store, ['lives',], this.onUpdate.bind(this));
+        let sl = new StateListener(store, ['game',], this.onUpdate.bind(this));
     };
 
     let p = createjs.extend(LivesView, createjs.Container);
     p.onUpdate = function(state){
-        this.text.text = R.join('\n')(R.repeat(TEXT, state.lives));
+        this.text.text = R.join('\n')(R.repeat(TEXT, history.length()));
     };
 
     LivesView = createjs.promote(LivesView, 'Container');

@@ -1,17 +1,25 @@
-define(['./gamestore', 'ramda'], function(store, R){
+define(['./gamestore', '../constants', 'ramda'], function(store, constants, R){
         'use strict';
 
         let history = [];
         store.subscribe(function(){
             let st = store.getState();
-            history.push(st);
-            history = R.takeLast(5, history);
-
-            console.log( 'store', R.map(a => a.piece.y)(history));
+            // store history only than pice changed
+            if(st != R.last(history) && (!history.length || st.piece != R.last(history).piece)){
+                history.push(st);
+                history = R.takeLast(constants.HISTORY, history);
+            }
+            // clear the history when switching a page
+            if(st.page !== constants.PAGE_GAME){
+                history.length = 0;
+            }
         });
 
-        return function pop(){
-            history.pop();
-            return history.pop();
+        return {
+            pop(){
+                history.pop();
+                return history.pop();
+            },
+            length: ()=> history.length,
         }
 });

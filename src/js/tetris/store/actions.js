@@ -9,13 +9,13 @@ define(['ramda'], function(R){
             R.split('_')
         );
 
-    const FIELDS = ['RESTART',
-                    'MOVE_RIGHT',
+    const FIELDS = ['MOVE_RIGHT',
                     'MOVE_LEFT',
                     'MOVE_DOWN',
                     'DROP_DOWN',
                     'ROTATE_LEFT',
                     'GAME_START',
+                    'GAME_RESTART',
                     'GAME_STOP',
                     'PUSH_BACK',
                     'SWITCH_PAGE'];

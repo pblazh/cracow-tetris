@@ -29,7 +29,7 @@ define(
                     nState.startTime = new Date().getTime();
                 }
                 break;
-            case actions.RESTART:
+            case actions.GAME_RESTART:
                 nState = R.merge(state, {
                     gamefield: INITIAL_STATE.gamefield,
                     speed: INITIAL_STATE.speed,

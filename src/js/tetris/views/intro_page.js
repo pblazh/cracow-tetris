@@ -23,9 +23,9 @@ define(['easel', '../constants', './uis'], function(createjs, constants, uis){
 
         this.addChild(buttonEnter);
 
-        let info = new createjs.Text(INFO, '15px ' + constants.FONT, constants.COLOR_FG);
+        let info = new createjs.Text(INFO, '18px ' + constants.FONT, constants.COLOR_FG);
         info.textAlign = 'left';
-        info.lineHeight = 16;
+        info.lineHeight = 18;
         info.x = constants.GAME_WIDTH / 2 - 90;
         info.y = constants.GAME_HEIGHT - 120;
         this.addChild(info);

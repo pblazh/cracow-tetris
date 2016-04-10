@@ -11,7 +11,7 @@ define(
 
     let finalPage = new FinalPage();
     finalPage.on('complete', function(){
-        store.dispatch(actions.restart());
+        store.dispatch(actions.gameRestart());
         store.dispatch(actions.switchPage(constants.PAGE_GAME));
     });
 
@@ -34,6 +34,9 @@ define(
             node.appendChild(canvas);
             this.stage = new createjs.Stage(canvas);
             store.dispatch(actions.switchPage(constants.PAGE_INTRO));
+
+            createjs.Ticker.addEventListener('tick', ()=> this.stage.update());
+
         },
         update: function(){
             //switch screens of the game
@@ -51,7 +54,15 @@ define(
                 }
 
                 // there is no need to track mouse when in game
-                this.stage.enableMouseOver((page === constants.PAGE_GAME) ? 0 : 10);
+                //this.stage.enableMouseOver((page === constants.PAGE_GAME) ? 0 : 10);
+
+                if(page === constants.PAGE_GAME){
+                    createjs.Ticker.removeEventListener('tick');
+                    this.stage.enableMouseOver(0);
+                }else{
+                    createjs.Ticker.addEventListener('tick', ()=> this.stage.update());
+                    this.stage.enableMouseOver(10);
+                }
             }
             this.stage.update();
         },

@@ -21,7 +21,7 @@ define(
         this.addChild(bg);
 
         var text = new createjs.Text('NEXT', '22px ' + constants.FONT, constants.COLOR_FG);
-        text.x = constants.PIXEL_WIDTH * 0.8;
+        text.x = constants.PIXEL_WIDTH * 0.95;
 
         this.addChild(text);
 
