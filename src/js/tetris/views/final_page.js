@@ -1,9 +1,9 @@
 define(
-    ['easel', '../constants', './uis', '../store/gamestore', './state_listener'],
-    function(createjs, constants, uis, store, StateListener){
+    ['easel', '../constants', './uis', './state_listener'],
+    function(createjs, constants, uis, StateListener){
     'use strict';
 
-    function FinalPage() {
+    function FinalPage(store) {
         this.Container_constructor();
 
         let greet = new createjs.Text('My greetings.\nYour score is:', '24px ' + constants.FONT, constants.COLOR_FG);

@@ -1,11 +1,11 @@
 define(
-    ['easel', '../constants', '../store/gamestore', './state_listener'],
-    function(createjs, constants, store, StateListener){
+    ['easel', '../constants', './state_listener'],
+    function(createjs, constants, StateListener){
     'use strict';
 
     var TEXT = 'SCORE: 0000  TIME: 00:00  SPEED: 00.1';
 
-    function StatusView() {
+    function StatusView(store) {
         this.Container_constructor();
         this.text = new createjs.Text(TEXT, '18px ' + constants.FONT, constants.COLOR_FG);
         this.addChild(this.text);

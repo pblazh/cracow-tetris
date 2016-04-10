@@ -1,11 +1,11 @@
 define(
-    ['ramda', 'easel', '../constants', '../store/gamestore', '../store/history', './state_listener'],
-    function(R, createjs, constants, store, history, StateListener){
+    ['ramda', 'easel', '../constants', '../store/history', './state_listener'],
+    function(R, createjs, constants, history, StateListener){
     'use strict';
 
     var TEXT = '*';
 
-    function LivesView() {
+    function LivesView(store, history) {
         this.Container_constructor();
 
         var title = new createjs.Text('LIVES', '22px ' + constants.FONT, constants.COLOR_FG);

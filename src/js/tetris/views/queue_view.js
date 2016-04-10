@@ -1,11 +1,11 @@
 define(
-    ['ramda', 'easel', '../constants', '../utils/tools', './uis', '../store/gamestore', './state_listener'],
-    function(R, createjs, constants, U, uis, store, StateListener){
+    ['ramda', 'easel', '../constants', '../utils/tools', './gamepixel_view', './state_listener'],
+    function(R, createjs, constants, U, GamepixelView, StateListener){
     'use strict';
 
     const PIECE_WIDTH = 3;
 
-    function QueueView() {
+    function QueueView(store) {
         this.Container_constructor();
 
         this.width = this.height = constants.PIXEL_WIDTH * 4;
@@ -27,7 +27,7 @@ define(
 
         this.pixels = [];
         R.forEach(n => {
-            let px = uis.gamePixel();
+            let px = new GamepixelView();
             px.y = 4 *  constants.PIXEL_WIDTH
                    - constants.PIXEL_WIDTH * Math.floor(n / 3);
             px.x = constants.PIXEL_WIDTH / 2 + constants.PIXEL_WIDTH * (n % 3);

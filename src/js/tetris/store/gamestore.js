@@ -1,14 +1,13 @@
-define(
-    ['redux', 'ramda', './actions', './tetris', '../constants'],
+define(['redux', 'ramda', './actions', './tetris', '../constants'],
     function(redux, R, actions, tetris, constants){
         'use strict';
 
+        // main reducer handle all state changes
         const INITIAL_STATE = {
             score: 0,
             startTime: 0,
             time: 0,
             speed: 2,
-            lives: 5,
             page: constants.PAGE_INTRO,
             queue: tetris.makePiece(),
             piece: tetris.makePiece(),
@@ -21,8 +20,6 @@ define(
             }
             let nState;
             switch(action.type){
-            case actions.PUSH_BACK:
-                return action.value;
             case actions.SWITCH_PAGE:
                 nState = R.merge(state, {page: action.value});
                 if(action.value === constants.PAGE_GAME){
@@ -37,6 +34,8 @@ define(
                     score: INITIAL_STATE.score,
                 });
                 break;
+            case actions.PUSH_BACK: //restore the state from the history
+                return action.value;
             case actions.MOVE_LEFT:
                 nState = R.merge(state, {
                     piece: tetris.moveLeft(state.piece, state.gamefield),
@@ -91,7 +90,7 @@ define(
                 });
 
                 nState.time = new Date().getTime() - nState.startTime;
-                if(tetris.checkBlock(nState.piece, nState.gamefield)){
+                if(tetris.isHitWalls(nState.piece, nState.gamefield)){
                     nState = R.merge(nState, {
                         page: constants.PAGE_FINAL,
                     });

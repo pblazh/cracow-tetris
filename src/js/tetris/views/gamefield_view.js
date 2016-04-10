@@ -1,15 +1,14 @@
-
 define(
-    ['ramda', 'easel', '../constants', '../utils/tools', './uis', '../store/gamestore', './state_listener'],
-    function(R, createjs, constants, U, uis, store, StateListener){
+    ['ramda', 'easel', '../constants', '../utils/tools', './gamepixel_view', './state_listener'],
+    function(R, createjs, constants, U, GamepixelView, StateListener){
     'use strict';
 
-    function GamefieldView() {
+    function GamefieldView(store) {
         this.Container_constructor();
 
         this.pixels = [];
         R.forEach(n => {
-            let px = uis.gamePixel();
+            let px = new GamepixelView();
             px.y = constants.GAME_HEIGHT
                    - constants.PIXEL_WIDTH
                    - constants.PIXEL_WIDTH * Math.floor(n / constants.FIELD_WIDTH);

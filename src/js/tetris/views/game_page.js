@@ -3,22 +3,22 @@ define(
     function(createjs, constants, GamefieldView, QueueView, StatusView, LivesView){
     'use strict';
 
-    function GamePage() {
+    function GamePage(store, history) {
         this.Container_constructor();
 
-        let gf = new GamefieldView();
+        let gf = new GamefieldView(store);
         gf.y = -10;
 
-        let gq = new QueueView();
+        let gq = new QueueView(store);
         gq.y = 40;
         gq.x = constants.GAME_WIDTH - gq.width - 10;
 
-        let gl = new LivesView();
+        let gl = new LivesView(store, history);
         gl.y = 190;
         gl.x = constants.GAME_WIDTH - 72;
 
 
-        let gs = new StatusView();
+        let gs = new StatusView(store);
         gs.y = 8;
         gs.x = 8;
 

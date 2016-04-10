@@ -1,5 +1,4 @@
-define(['easel', '../constants'],
-    function(createjs, constants){
+define(['easel', '../constants'], function(createjs, constants){
     'use strict';
 
     const KEYCODE_LEFT = 37,

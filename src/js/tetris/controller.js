@@ -3,6 +3,8 @@ define(
     function(createjs, constants, store, history,  actions, keylistener){
     'use strict';
 
+    // the main game controller. It set the key listener and dispatch
+    // corrsponding actions on the store.
     function Controller(){
         this.isRunning = false;
     }
@@ -34,21 +36,21 @@ define(
         this.isRunning = false;
         clearInterval(this.interval);
         this.kListener.destroy();
-    }
+    };
 
     Controller.prototype.update = function(){
         clearInterval(this.interval);
         store.dispatch(actions.moveDown());
         if(this.isRunning){
-        this.interval = setTimeout( this.update.bind(this), store.getState().speed * 1000);
+            this.interval = setTimeout( this.update.bind(this), store.getState().speed * 1000);
         }
-    }
+    };
 
     Controller.prototype.start = function(){
         this.kListener = keylistener(store);
         this.kListener.on('key', this.onKey);
         this.isRunning = true;
-        this.update();
+        this.interval = setTimeout( this.update.bind(this), store.getState().speed * 1000);
     };
 
     return Controller;
