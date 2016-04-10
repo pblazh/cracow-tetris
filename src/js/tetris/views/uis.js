@@ -23,6 +23,7 @@ define(['easel'], function(createjs){
     });
     let logo = new createjs.Sprite(LOGO_SHEET);
 
+
     return {
         buttonEnter: function(){
             let buttonEnter = new createjs.Sprite(ENTER_BUTTON_SHEET, 'out');

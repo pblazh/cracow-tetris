@@ -1,4 +1,4 @@
-define(['easel', '../constants'], function(createjs, constants){
+define(['easel', './magic', '../constants'], function(createjs, magic, constants){
     'use strict';
 
 
@@ -61,12 +61,17 @@ define(['easel', '../constants'], function(createjs, constants){
     }
 
     function GamePixel() {
-        this.Shape_constructor();
+        this.Container_constructor();
         this.enabled = false;
+        this.magic = magic();
+
+        this.bg = new createjs.Shape();
+        this.addChild(this.bg);
+        this.addChild(this.magic);
         this.reDraw();
     }
 
-    let p = createjs.extend(GamePixel, createjs.Shape);
+    let p = createjs.extend(GamePixel, createjs.Container);
     p.highlight = function(color) {
         if(this.color !== color){
             this.color = color;
@@ -74,15 +79,16 @@ define(['easel', '../constants'], function(createjs, constants){
         }
     }
     p.reDraw = function() {
-        this.graphics
+        this.bg.graphics
             .beginFill(constants.COLOR_BG)
             .drawRect(0, 0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
 
-        fill(this.graphics, this.color);
-        this.cache(0,0, 24,24);
+        fill(this.bg.graphics, this.color);
+        this.magic.gotoAndPlay(this.color ? 'out' : 'in');
+        this.bg.cache(0,0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
     }
 
-    GamePixel = createjs.promote(GamePixel, 'Shape');
+    GamePixel = createjs.promote(GamePixel, 'Container');
     return GamePixel;
 
 });
