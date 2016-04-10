@@ -22,7 +22,7 @@ define(
             store.dispatch(actions.dropDown());
             break;
         case constants.KEY_BACK:
-            //store.dispatch(actions.dropDown());
+            store.dispatch(actions.rollBack());
             break;
         }
     };

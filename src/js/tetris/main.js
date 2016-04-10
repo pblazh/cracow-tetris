@@ -38,7 +38,6 @@ define(
         update: function(){
             //switch screens of the game
             let page = store.getState().page;
-            console.log( 'page:', page);
             if(this.currentPage !== page && pages[page]){
                 this.stage.removeChild(pages[this.currentPage]);
                 this.currentPage = page;

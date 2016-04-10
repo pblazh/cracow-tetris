@@ -8,6 +8,7 @@ define(
             startTime: 0,
             time: 0,
             speed: 2,
+            lives: 5,
             page: constants.PAGE_INTRO,
             queue: tetris.makePiece(),
             piece: tetris.makePiece(),
@@ -15,6 +16,7 @@ define(
             game: null,
         };
         function gameReducer(state, action){
+            console.log( action );
             if(!state){
                 return INITIAL_STATE;
             }
@@ -68,6 +70,9 @@ define(
             default:
                 nState = state;
             }
+
+            // we are playing game try to move the gamefield down,
+            // collect the scores, update time, speed etc
             if(state.page === constants.PAGE_GAME){
                 let res = tetris.shiftField(nState.gamefield);
                 let nScore = state.score + res[1];

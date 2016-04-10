@@ -1,5 +1,5 @@
 {
-  "name": "cracow.tetris",
+  "name": "cracow-tetris",
   "version": "0.0.0",
   "dependencies": {
     "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/3.0.4/redux.js",
