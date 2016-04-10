@@ -6,8 +6,9 @@ define(
     function FinalPage() {
         this.Container_constructor();
 
-        let greet = new createjs.Text('My  greetings.\nYour score is:', '24px ' + constants.FONT, constants.COLOR_FG);
+        let greet = new createjs.Text('My greetings.\nYour score is:', '24px ' + constants.FONT, constants.COLOR_FG);
         greet.textAlign = 'center';
+        greet.lineHeight = 26;
         greet.x = constants.GAME_WIDTH / 2;
         greet.y = constants.GAME_HEIGHT / 2 - 130;
         this.addChild(greet);

@@ -4,7 +4,9 @@ define(
     'use strict';
 
     function Controller(){
+        this.isRunning = false;
     }
+
     Controller.prototype.onKey= function(ev){
         switch( ev.value ){
         case constants.KEY_LEFT:
@@ -23,18 +25,27 @@ define(
             //store.dispatch(actions.dropDown());
             break;
         }
-    }
+    };
+
     Controller.prototype.stop = function(){
+        this.isRunning = false;
         clearInterval(this.interval);
         this.kListener.destroy();
     }
+
+    Controller.prototype.update = function(){
+        clearInterval(this.interval);
+        store.dispatch(actions.moveDown());
+        if(this.isRunning){
+        this.interval = setTimeout( this.update.bind(this), store.getState().speed * 1000);
+        }
+    }
+
     Controller.prototype.start = function(){
         this.kListener = keylistener(store);
         this.kListener.on('key', this.onKey);
-
-        this.interval = setInterval( function(){
-            store.dispatch(actions.moveDown());
-        }, 3000);
+        this.isRunning = true;
+        this.update();
     };
 
     return Controller;

@@ -7,6 +7,7 @@ define(
             score: 0,
             startTime: 0,
             time: 0,
+            speed: 2,
             page: constants.PAGE_INTRO,
             queue: tetris.makePiece(),
             piece: tetris.makePiece(),
@@ -69,14 +70,19 @@ define(
             }
             if(state.page === constants.PAGE_GAME){
                 let res = tetris.shiftField(nState.gamefield);
+                let nScore = state.score + res[1];
                 nState = R.merge(nState, {
                     gamefield: res[0],
-                    score: state.score + res[1],
+                    score: nScore,
+                    speed: nScore
+                        ? INITIAL_STATE.speed / (nScore * 0.5)
+                        : INITIAL_STATE.speed,
                 });
+
                 nState.time = new Date().getTime() - nState.startTime;
                 if(tetris.checkBlock(nState.piece, nState.gamefield)){
                     nState = R.merge(nState, {
-                        page: constants.PAGE_FINAL
+                        page: constants.PAGE_FINAL,
                     });
                 }
             }

@@ -38,6 +38,7 @@ define(
         update: function(){
             //switch screens of the game
             let page = store.getState().page;
+            console.log( 'page:', page);
             if(this.currentPage !== page && pages[page]){
                 this.stage.removeChild(pages[this.currentPage]);
                 this.currentPage = page;
@@ -46,7 +47,7 @@ define(
                 if(page === constants.PAGE_GAME){
                     gameController.start();
                 }
-                if(page === constants.PAGE_SCORE){
+                if(page === constants.PAGE_FINAL){
                     gameController.stop();
                 }
 

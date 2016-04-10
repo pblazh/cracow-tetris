@@ -10,7 +10,7 @@ define(
         gf.y = -10;
 
         let gq = new QueueView();
-        gq.y = 8;
+        gq.y = 40;
         gq.x = constants.GAME_WIDTH - gq.width - 10;
 
         let gs = new StatusView();
