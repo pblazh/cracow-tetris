@@ -1,7 +1,8 @@
 require(['config'], function(){
     'use strict';
-    require(['tetris/main'], function (App) {
+    require(['pixi', 'tetris/main'], function (PX, App) {
         /* Just an entrance point */
-        var app = new App(document.getElementById('app'));
+        PX.loader.add('assets/sprites.json')
+            .load(() => new App(document.getElementById('app')));
     });
 });

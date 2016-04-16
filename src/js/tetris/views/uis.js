@@ -1,35 +1,24 @@
-define(['easel'], function(createjs){
+define(['pixi', 'tools'], function(PX, tools){
     'use strict';
 
-    const ENTER_BUTTON_SHEET = new createjs.SpriteSheet({
-        images: ['./assets/sprites.png'],
-        frames: [
-            [10, 10, 80, 35],
-            [95, 10, 80, 35],
-            [175, 10, 80, 35],
-        ],
-        animations: {
-            out: 0,
-            over: 1,
-            down: 2,
-        }
-    });
+    function Button(textures){
+        PX.Sprite.call(this, textures[0]);
+        this.textures = textures;
+        this.interactive = true;
 
-    const LOGO_SHEET = new createjs.SpriteSheet({
-        images: ['./assets/sprites.png'],
-        frames: [
-            [10, 50, 140, 80],
-        ],
-    });
-    let logo = new createjs.Sprite(LOGO_SHEET);
-
+        this.on('mouseover', () =>{ this.texture = textures[1];});
+        this.on('mouseout', () =>{ this.texture = textures[0];});
+        this.on('mouseup', () => this.texture = textures[0]);
+        this.on('mousedown', () => this.texture = textures[2]);
+    }
+    Button = tools.extend(Button, PX.Sprite);
 
     return {
-        buttonEnter: function(){
-            let buttonEnter = new createjs.Sprite(ENTER_BUTTON_SHEET, 'out');
-            let helper = new createjs.ButtonHelper(buttonEnter, 'out', 'over', 'down', false);
-            return buttonEnter;
-        },
-        logo,
+        buttonEnter: () => new Button([
+            PX.utils.TextureCache['button_normal.png'],
+            PX.utils.TextureCache['button_over.png'],
+            PX.utils.TextureCache['button_active.png'],
+        ]),
+        logo: () => new PX.Sprite(PX.utils.TextureCache['logo.png']),
     };
 });

@@ -1,4 +1,4 @@
-define(['easel', 'constants', './uis'], function(createjs, constants, uis){
+define(['pixi', 'signals', 'constants', 'tools', './uis'], function(PX, signals, constants, tools, uis){
     'use strict';
 
     // starting page of the game
@@ -12,9 +12,11 @@ define(['easel', 'constants', './uis'], function(createjs, constants, uis){
                  ].join('\n');
 
     function IntroPage() {
-        this.Container_constructor();
+        PX.Container.call(this);
 
-        let logo = uis.logo;
+        this.complete = new signals.Signal();
+
+        let logo = uis.logo();
         logo.x = constants.GAME_WIDTH / 2 - 65;
         logo.y = constants.GAME_HEIGHT / 2 - 90;
 
@@ -23,19 +25,23 @@ define(['easel', 'constants', './uis'], function(createjs, constants, uis){
         let buttonEnter = uis.buttonEnter();
         buttonEnter.x = constants.GAME_WIDTH/2 - 40;
         buttonEnter.y = constants.GAME_HEIGHT / 2 + 10;
-        buttonEnter.addEventListener('click', () => this.dispatchEvent('complete'));
+        buttonEnter.on('click', this.complete.dispatch);
 
         this.addChild(buttonEnter);
 
-        let info = new createjs.Text(INFO, '18px ' + constants.FONT, constants.COLOR_FG);
-        info.textAlign = 'left';
-        info.lineHeight = 18;
+        let info = new PX.Text(INFO, {
+            font: '18px ' + constants.FONT,
+            fill: constants.COLOR_FG,
+            align: 'left',
+            lineHeight: 18,
+        });
         info.x = constants.GAME_WIDTH / 2 - 90;
         info.y = constants.GAME_HEIGHT - 140;
         this.addChild(info);
+
     }
 
-    let p = createjs.extend(IntroPage, createjs.Container);
-    IntroPage = createjs.promote(IntroPage, 'Container');
+    IntroPage = tools.extend(IntroPage, PX.Container);
+
     return IntroPage;
 });

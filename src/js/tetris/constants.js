@@ -2,8 +2,8 @@ define([], function(){
     'use strict';
 
     return {
-        COLOR_BG: '#000000',
-        COLOR_FG: '#C2FFAE',
+        COLOR_BG: 0,
+        COLOR_FG: 0xC2FFAE,
         PAGE_INTRO: 'PAGE_INTRO',
         PAGE_GAME: 'PAGE_GAME',
         PAGE_FINAL: 'PAGE_FINAL',

@@ -1,11 +1,11 @@
 define(
-    ['easel', 'constants', './gamefield_view', './queue_view', './status_view', './lives_view'],
-    function(createjs, constants, GamefieldView, QueueView, StatusView, LivesView){
+    ['pixi', 'tools', 'constants', './gamefield_view', './queue_view', './status_view', './lives_view'],
+    function(PX, tools, constants, GamefieldView, QueueView, StatusView, LivesView){
     'use strict';
 
     // the page of the game. Just the container to distribute subcomponents
     function GamePage(store, history) {
-        this.Container_constructor();
+        PX.Container.call(this);
 
         let gf = new GamefieldView(store);
         gf.y = -10;
@@ -29,8 +29,8 @@ define(
         this.addChild(gs);
     };
 
-    let p = createjs.extend(GamePage, createjs.Container);
-    GamePage = createjs.promote(GamePage, 'Container');
+    GamePage = tools.extend(GamePage, PX.Container);
+
     return GamePage;
 
 });

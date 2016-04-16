@@ -1,4 +1,4 @@
-define(['easel', '../constants'], function(createjs, constants){
+define(['pixi', 'signals', '../constants'], function(PX, signals, constants){
     'use strict';
 
     // listen key for the keyevent and convert them into game specific events
@@ -14,46 +14,28 @@ define(['easel', '../constants'], function(createjs, constants){
         (ev) => {
             switch(ev.keyCode){
             case KEYCODE_LEFT:
-                listener.dispatchEvent({
-                        type: 'key',
-                        value: constants.KEY_LEFT,
-                });
+                listener.keydown.dispatch(constants.KEY_LEFT);
                 break;
             case KEYCODE_RIGHT:
-                listener.dispatchEvent({
-                    type: 'key',
-                    value: constants.KEY_RIGHT,
-                });
+                listener.keydown.dispatch(constants.KEY_RIGHT);
                 break;
             case KEYCODE_UP:
-                listener.dispatchEvent({
-                    type: 'key',
-                    value: constants.KEY_BACK,
-                });
+                listener.keydown.dispatch(constants.KEY_BACK);
                 break;
             case KEYCODE_DOWN:
-                listener.dispatchEvent({
-                    type: 'key',
-                    value: constants.KEY_ROTATE,
-                });
+                listener.keydown.dispatch(constants.KEY_ROTATE);
                 break;
             case KEYCODE_SPACE:
-                listener.dispatchEvent({
-                    type: 'key',
-                    value: constants.KEY_DROP,
-                });
+                listener.keydown.dispatch(constants.KEY_DROP);
             case KEYCODE_M:
-                listener.dispatchEvent({
-                    type: 'key',
-                    value: constants.KEY_MAGIC,
-                });
+                listener.keydown.dispatch(constants.KEY_MAGIC);
                 break;
             };
         }
 
     function KeyListener(){
+        this.keydown = new signals.Signal();
     }
-    createjs.EventDispatcher.initialize(KeyListener.prototype);
 
     return function(){
         let kl = new KeyListener();

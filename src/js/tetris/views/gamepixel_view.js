@@ -1,4 +1,4 @@
-define(['easel', './magic', 'constants'], function(createjs, magic, constants){
+define(['pixi', './magic', 'tools', 'constants'], function(PX, magic, tools, constants){
     'use strict';
 
 
@@ -63,36 +63,39 @@ define(['easel', './magic', 'constants'], function(createjs, magic, constants){
         }
     }
 
-    function GamePixel() {
-        this.Container_constructor();
-        this.enabled = false;
-        // the sprite whith pixalate effect
-        this.magic = magic();
-
-        this.bg = new createjs.Shape();
-        this.addChild(this.bg);
-        this.addChild(this.magic);
-        this.reDraw();
-    }
-
-    let p = createjs.extend(GamePixel, createjs.Container);
-    p.highlight = function(color) {
+    const highlight = function(color) {
         if(this.color !== color){
             this.color = color;
             this.reDraw();
         }
     }
-    p.reDraw = function() {
-        this.bg.graphics
-            .beginFill(constants.COLOR_BG)
+
+    const reDraw = function() {
+        this.bg.beginFill(constants.COLOR_BG)
             .drawRect(0, 0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
 
-        fill(this.bg.graphics, this.color);
-        this.magic.gotoAndPlay(this.color ? 'out' : 'in');
-        this.bg.cache(0,0, constants.PIXEL_WIDTH, constants.PIXEL_WIDTH);
+        fill(this.bg, this.color);
+        this.bg.endFill();
+        this.magic.gotoAndPlay(0);
+    }
+    function GamePixel() {
+        PX.Container.call(this);
+
+        this.highlight = highlight;
+        this.reDraw = reDraw.bind(this);
+
+        this.enabled = false;
+        // the sprite whith pixalate effect
+        this.magic = magic();
+
+        this.bg = new PX.Graphics();
+        this.addChild(this.bg);
+        this.addChild(this.magic);
+        this.reDraw();
     }
 
-    GamePixel = createjs.promote(GamePixel, 'Container');
+
+    GamePixel = tools.extend(GamePixel, PX.Container);
     return GamePixel;
 
 });

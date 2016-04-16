@@ -1,6 +1,6 @@
 define(
-    ['easel', './constants', './store/gamestore', './store/history', './store/actions', './utils/keylistener'],
-    function(createjs, constants, store, history,  actions, keylistener){
+    ['./constants', './store/gamestore', './store/history', './store/actions', './utils/keylistener'],
+    function(constants, store, history,  actions, keylistener){
     'use strict';
 
     // the main game controller. It set the key listener and dispatch
@@ -9,8 +9,8 @@ define(
         this.isRunning = false;
     }
 
-    Controller.prototype.onKey= function(ev){
-        switch( ev.value ){
+    Controller.prototype.onKey= function(key){
+        switch( key ){
         case constants.KEY_LEFT:
             store.dispatch(actions.moveLeft());
             break;
@@ -51,7 +51,7 @@ define(
 
     Controller.prototype.start = function(){
         this.kListener = keylistener(store);
-        this.kListener.on('key', this.onKey);
+        this.kListener.keydown.add(this.onKey);
         this.isRunning = true;
         this.interval = setTimeout( this.update.bind(this), store.getState().speed * 1000);
     };

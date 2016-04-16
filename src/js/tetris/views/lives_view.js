@@ -1,6 +1,6 @@
 define(
-    ['ramda', 'easel', 'constants', '../store/history', './state_listener'],
-    function(R, createjs, constants, history, StateListener){
+    ['ramda', 'pixi', 'tools', 'constants', '../store/history', './state_listener'],
+    function(R, PX, tools, constants, history, StateListener){
     'use strict';
 
     // show content of the history buffer
@@ -8,13 +8,22 @@ define(
     var TEXT = '*';
 
     function LivesView(store, history) {
-        this.Container_constructor();
+        PX.Container.call(this);
+        this.onUpdate = function(state){
+            this.text.text = R.join('\n')(R.repeat(TEXT, history.length()));
+        };
 
-        var title = new createjs.Text('LIVES', '22px ' + constants.FONT, constants.COLOR_FG);
-        title.x = constants.PIXEL_WIDTH * 0.70;
-        title.textAlign = 'center';
+        const CSS = {
+            font: '24px ' + constants.FONT,
+            fill: constants.COLOR_FG,
+            align: 'center',
+            lineHeight: 26,
+        };
 
-        this.text = new createjs.Text(TEXT, '50px ' + constants.FONT, constants.COLOR_FG);
+        var title = new PX.Text('LIVES', CSS);
+        title.x = -constants.PIXEL_WIDTH * 0.70;
+
+        this.text = new PX.Text(TEXT, R.merge(CSS, {font: '42px ' + constants.FONT}));
         this.text.y = 30;
 
         this.addChild(title);
@@ -23,12 +32,7 @@ define(
         let sl = new StateListener(store, ['game',], this.onUpdate.bind(this));
     };
 
-    let p = createjs.extend(LivesView, createjs.Container);
-    p.onUpdate = function(state){
-        this.text.text = R.join('\n')(R.repeat(TEXT, history.length()));
-    };
-
-    LivesView = createjs.promote(LivesView, 'Container');
+    LivesView = tools.extend(LivesView, PX.Container);
     return LivesView;
 
 });
